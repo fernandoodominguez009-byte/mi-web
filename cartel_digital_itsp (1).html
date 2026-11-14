@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cartel Digital Interactivo – ITSP Contador Público</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{cartel:{olive:'#4b5d3a',oliveDark:'#26301d',gold:'#d4a62a',goldLight:'#f4ecd0',cream:'#f6f1e4',dark:'#1d2416'}},
+fontFamily:{display:['Fraunces','Georgia','serif'],sans:['Public Sans','system-ui','sans-serif'],mono:['Public Sans','system-ui','sans-serif']}}}}
+</script>
+<style>
+body{background:#efe9d8;background-image:radial-gradient(circle at 15% 0,#f8f4e8 0,transparent 45%),radial-gradient(circle at 100% 40%,#e6dfc8 0,transparent 40%);color:#1d2416;font-family:'Public Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.font-display{font-family:'Fraunces',Georgia,serif;letter-spacing:-.01em}
+.font-mono{letter-spacing:.01em}
+main section{scroll-margin-top:84px}
+main>section{border-radius:28px!important;box-shadow:0 1px 0 #fff inset,0 18px 40px -22px rgba(38,48,29,.35)!important}
+main>section.bg-white{border:1px solid rgba(75,93,58,.14)!important}
+section h2{line-height:1.1}
+.marco-tab{transition:.2s}
+.tab-active{background:#26301d!important;color:#f4ecd0!important;box-shadow:0 6px 14px -6px rgba(38,48,29,.6)}
+input,select,textarea{outline:none}
+input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(212,166,42,.35);border-color:#d4a62a!important}
+a:focus-visible,button:focus-visible{outline:3px solid #d4a62a;outline-offset:2px}
+.hero-bg{background:linear-gradient(135deg,rgba(38,48,29,.96),rgba(75,93,58,.9)),repeating-linear-gradient(45deg,#26301d 0 14px,#2d3922 14px 28px)}
+#toast{transition:all .35s}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media print{nav,#toast{display:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<nav class="sticky top-0 z-50 bg-cartel-cream/90 backdrop-blur border-b border-cartel-olive/20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16 gap-4">
+        <a href="#resumen" class="flex items-center gap-2.5 shrink-0">
+          <span class="w-9 h-9 rounded-xl bg-cartel-oliveDark text-cartel-gold flex items-center justify-center"><i class="fa-solid fa-scale-balanced"></i></span>
+          <span class="font-display font-black text-cartel-oliveDark leading-none text-base">Cartel Digital<small class="block font-sans text-[10px] font-semibold text-cartel-olive mt-0.5">ITSP · Contador Público</small></span>
+        </a>
+        <div class="hidden xl:flex items-center gap-4 text-xs font-semibold text-cartel-dark">
+          <a href="#resumen" class="hover:text-cartel-gold transition">Resumen</a>
+          <a href="#problematica" class="hover:text-cartel-gold transition">Problemática</a>
+          <a href="#objetivos" class="hover:text-cartel-gold transition">Objetivos</a>
+          <a href="#marco-teorico" class="hover:text-cartel-gold transition">Marco &amp; Glosario</a>
+          <a href="#metodologia" class="hover:text-cartel-gold transition">Metodología</a>
+          <a href="#herramientas-rurales" class="hover:text-cartel-gold transition">Simuladores Rurales</a>
+          <a href="#calculadora-fiscal" class="bg-cartel-gold hover:bg-amber-400 text-cartel-oliveDark px-3.5 py-2 rounded-xl transition shadow-sm flex items-center gap-1.5 font-bold">
+            <i class="fa-solid fa-calculator"></i> Calculadora Fiscal
+          </a>
+          <a href="#equipo" class="hover:text-cartel-gold transition">Autores</a>
+          <a href="#qr-seccion" class="hover:text-cartel-gold transition">QR Dinámico</a>
+        </div>
+
+        <button id="mobile-menu-btn" class="xl:hidden p-2.5 rounded-xl text-cartel-olive hover:bg-cartel-goldLight" aria-label="Abrir menú">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden xl:hidden bg-cartel-cream border-b border-cartel-olive/20 px-4 pt-2 pb-4 space-y-2">
+      <a href="#resumen" class="block py-2 px-3 rounded-lg text-sm font-semibold text-cartel-dark hover:bg-cartel-goldLight">Resumen Ejecutivo</a>
+      <a href="#problematica" class="block py-2 px-3 rounded-lg text-sm font-semibold text-cartel-dark hover:bg-cartel-goldLight">Problemática y Justificación</a>
+      <a href="#objetivos" class="block py-2 px-3 rounded-lg text-sm font-semibold text-cartel-dark hover:bg-cartel-goldLight">Objetivos y Delimitación</a>
+      <a href="#marco-teorico" class="block py-2 px-3 rounded-lg text-sm font-semibold text-cartel-dark hover:bg-cartel-goldLight">Marco Teórico, Legal y Glosario</a>
+      <a href="#metodologia" class="block py-2 px-3 rounded-lg text-sm font-semibold text-cartel-dark hover:bg-cartel-goldLight">Operacionalización y Cronograma</a>
+      <a href="#herramientas-rurales" class="block py-2 px-3 rounded-lg text-sm font-semibold text-cartel-dark hover:bg-cartel-goldLight">Simuladores y Cuaderno Contable</a>
+      <a href="#calculadora-fiscal" class="block py-2 px-3 rounded-lg text-sm font-bold text-cartel-oliveDark bg-cartel-gold">Calculadora Fiscal Pro</a>
+      <a href="#equipo" class="block py-2 px-3 rounded-lg text-sm font-semibold text-cartel-dark hover:bg-cartel-goldLight">Equipo de Investigación</a>
+      <a href="#qr-seccion" class="block py-2 px-3 rounded-lg text-sm font-semibold text-cartel-dark hover:bg-cartel-goldLight">Generador QR y Anexos</a>
+    </div>
+  </nav>
+  </nav>
+<header id="resumen" class="hero-bg text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
+    <div class="max-w-4xl space-y-6">
+        <span class="inline-block px-3.5 py-1.5 rounded-full bg-cartel-gold/15 border border-cartel-gold/40 text-cartel-gold text-xs font-bold">Protocolo de investigación · Tempoal de Sánchez, Veracruz</span>
+        <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05]">Formalizar la tiendita: del efectivo al RESICO en la Huasteca</h1>
+        <p class="text-slate-200 text-sm sm:text-base lg:text-lg leading-relaxed max-w-3xl">
+          Estudio microeconómico y tributario con alcance ampliado en la Huasteca Veracruzana. Proyección e impacto metodológico para <strong class="text-cartel-gold font-bold">800 micro-negocios rurales</strong>, analizando la transición hacia el RESICO y la bancarización digital.
+        </p>
+
+        <!-- Indicadores Rápidos del Protocolo -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+          <div class="bg-black/25 backdrop-blur-sm border border-cartel-gold/30 rounded-2xl p-3.5">
+            <span class="block font-display text-2xl sm:text-3xl font-black text-cartel-gold">100%</span>
+            <span class="text-[11px] text-slate-200 font-medium">Informalidad local en Rancho Nuevo Limón</span>
+          </div>
+          <div class="bg-black/25 backdrop-blur-sm border border-cartel-gold/30 rounded-2xl p-3.5">
+            <span class="block font-display text-2xl sm:text-3xl font-black text-cartel-gold">800</span>
+            <span class="text-[11px] text-slate-200 font-medium">Micro-negocios en alcance regional</span>
+          </div>
+          <div class="bg-black/25 backdrop-blur-sm border border-cartel-gold/30 rounded-2xl p-3.5">
+            <span class="block font-display text-2xl sm:text-3xl font-black text-cartel-gold">1%–2.5%</span>
+            <span class="text-[11px] text-slate-200 font-medium">Tasa preferencial ISR bajo RESICO</span>
+          </div>
+          <div class="bg-black/25 backdrop-blur-sm border border-cartel-gold/30 rounded-2xl p-3.5">
+            <span class="block font-display text-2xl sm:text-3xl font-black text-cartel-gold">+18%</span>
+            <span class="text-[11px] text-slate-200 font-medium">Captación estimada con cobro mPOS</span>
+          </div>
+        </div>
+
+        <!-- Créditos Plurales -->
+        <div class="pt-4 border-t border-white/20 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
+          <div><p class="font-bold text-white mb-1">Institución</p><p>Instituto Tecnológico Superior de Pánuco (ITSP)<br>Carrera de Contador Público</p></div>
+          <div><p class="font-bold text-white mb-1">Línea de investigación</p><p>Fiscalidad, inclusión financiera y micro-negocios rurales</p></div>
+        </div>
+    </div>
+  </div>
+</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-10">
+    <!-- PLANTEAMIENTO DEL PROBLEMA Y JUSTIFICACIÓN -->
+    <section id="problematica" class="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-cartel-olive/20 space-y-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center text-lg shadow">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-red-600 uppercase font-mono">Capítulo I • Diagnóstico y Pertinencia</span>
+            <h2 class="font-display text-2xl sm:text-3xl font-black text-cartel-oliveDark">Planteamiento del Problema y Justificación</h2>
+          </div>
+        </div>
+        <button onclick="window.print()" class="self-start sm:self-auto px-4 py-2 rounded-xl bg-cartel-cream hover:bg-cartel-goldLight border border-cartel-olive/25 text-xs font-bold text-cartel-oliveDark transition flex items-center gap-2 font-mono">
+          <i class="fa-solid fa-print text-cartel-olive"></i> Imprimir Ficha
+        </button>
+      </div>
+
+      <div class="bg-red-50 border-l-4 border-red-600 p-6 rounded-r-2xl">
+        <p class="text-sm sm:text-base font-semibold text-slate-800 leading-relaxed">
+          En la comunidad rural de Rancho Nuevo Limón, Tempoal de Sánchez, Veracruz, el 100% de las tienditas de abarrotes opera en la informalidad absoluta sin registro ante el SAT. Esta situación se origina por la brecha digital e inclusión financiera, los costos de traslado a sedes tributarias y la ausencia de beneficios tangibles por formalizarse. Por lo tanto, los tenderos sufren vulnerabilidad económica, falta de crédito bancario y desprotección social.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-cartel-cream border border-cartel-olive/20 rounded-2xl p-6">
+          <h3 class="font-display font-bold text-cartel-oliveDark text-base mb-2"><i class="fa-solid fa-map-pin text-cartel-gold mr-2"></i> Barrera Geográfica</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Distancias prolongadas hacia las oficinas desconcentradas del SAT (Pánuco, Tuxpan o Tampico) y tramos de terracería que dificultan el traslado continuo de los comerciantes.</p>
+        </div>
+        <div class="bg-cartel-cream border border-cartel-olive/20 rounded-2xl p-6">
+          <h3 class="font-display font-bold text-cartel-oliveDark text-base mb-2"><i class="fa-solid fa-laptop-code text-cartel-gold mr-2"></i> Brecha Tecnológica</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Conectividad a internet intermitente y escasa alfabetización digital para la gestión de la e.firma, SAT Móvil y portales tributarios.</p>
+        </div>
+        <div class="bg-cartel-cream border border-cartel-olive/20 rounded-2xl p-6">
+          <h3 class="font-display font-bold text-cartel-oliveDark text-base mb-2"><i class="fa-solid fa-coins text-cartel-gold mr-2"></i> Economía de Subsistencia</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Confusión entre el flujo de caja del negocio y el presupuesto familiar, operando exclusivamente bajo esquemas de efectivo y "fiado" comunitario.</p>
+        </div>
+      </div>
+
+      <!-- 4 Dimensiones de la Justificación -->
+      <div class="pt-4 border-t border-cartel-olive/15">
+        <h3 class="font-display text-lg font-bold text-cartel-oliveDark mb-4">Cuatro Dimensiones de la Justificación (Sección 1.7)</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-4 rounded-2xl bg-cartel-goldLight/60 border border-cartel-olive/15">
+            <span class="text-[11px] font-bold uppercase text-cartel-olive font-mono block mb-1">01. Teórica y Práctica</span>
+            <p class="text-xs text-slate-700 leading-relaxed">Cubre el vacío analítico sobre micro-negocios rurales de subsistencia y evalúa el costo de oportunidad del uso exclusivo de efectivo frente a cobros mPOS.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-cartel-goldLight/60 border border-cartel-olive/15">
+            <span class="text-[11px] font-bold uppercase text-cartel-olive font-mono block mb-1">02. Gestión Comercial</span>
+            <p class="text-xs text-slate-700 leading-relaxed">Introduce la lógica elemental del registro de ventas: separación entre caja del negocio y gasto del hogar antes de implementar sistemas complejos.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-cartel-goldLight/60 border border-cartel-olive/15">
+            <span class="text-[11px] font-bold uppercase text-cartel-olive font-mono block mb-1">03. Metodológica</span>
+            <p class="text-xs text-slate-700 leading-relaxed">Estructura mixta replicable en los 800 micro-negocios de la Huasteca Veracruzana sin generar desconfianza tributaria en los tenderos.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-cartel-goldLight/60 border border-cartel-olive/15">
+            <span class="text-[11px] font-bold uppercase text-cartel-olive font-mono block mb-1">04. Socioinstitucional</span>
+            <p class="text-xs text-slate-700 leading-relaxed">Provee insumos empíricos al SAT y fomento económico para diseñar esquemas de simplificación administrativa, SAT Móvil y capacitación rural.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OBJETIVOS GENERAL Y ESPECÍFICOS + DELIMITACIÓN -->
+    <section id="objetivos" class="space-y-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- General -->
+        <div class="lg:col-span-5 bg-gradient-to-br from-cartel-oliveDark to-cartel-olive text-white rounded-3xl p-8 shadow-xl border border-cartel-gold flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 text-cartel-gold text-xs font-bold uppercase tracking-wider mb-4 font-mono">
+              <i class="fa-solid fa-bullseye"></i> Meta Rectoral
+            </div>
+            <h3 class="font-display text-2xl font-black mb-4 text-cartel-goldLight">Objetivo General</h3>
+            <p class="text-sm sm:text-base leading-relaxed text-slate-100">
+              Analizar las causas determinantes y las consecuencias socioeconómicas de la informalidad absoluta en las tienditas de abarrotes de la comunidad de Rancho Nuevo Limón, Tempoal de Sánchez, Veracruz, para el diseño de estrategias públicas e institucionales que promuevan el desarrollo comercial rural.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-white/20 text-xs text-cartel-gold font-mono">
+            Pregunta Rectora: ¿Cuáles son las causas determinantes y consecuencias socioeconómicas de la informalidad absoluta?
+          </div>
+        </div>
+
+        <!-- Específicos -->
+        <div class="lg:col-span-7 bg-white rounded-3xl p-8 shadow-xl border border-cartel-olive/20 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 text-cartel-olive text-xs font-bold uppercase tracking-wider mb-4 font-mono">
+              <i class="fa-solid fa-list-check"></i> Etapas Analíticas
+            </div>
+            <h3 class="font-display text-2xl font-black mb-6 text-cartel-oliveDark">Objetivos Específicos</h3>
+            
+            <div class="space-y-4">
+              <div class="flex gap-4 items-start p-4 bg-cartel-cream rounded-2xl border border-cartel-olive/10">
+                <span class="w-7 h-7 rounded-xl bg-cartel-olive text-cartel-gold flex items-center justify-center font-bold text-xs shrink-0 font-mono">1</span>
+                <p class="text-xs sm:text-sm text-slate-700 font-medium">Identificar los factores que limitan la inscripción de los tenderos de abarrotes de Rancho Nuevo Limón ante el Servicio de Administración Tributaria (SAT).</p>
+              </div>
+
+              <div class="flex gap-4 items-start p-4 bg-cartel-cream rounded-2xl border border-cartel-olive/10">
+                <span class="w-7 h-7 rounded-xl bg-cartel-olive text-cartel-gold flex items-center justify-center font-bold text-xs shrink-0 font-mono">2</span>
+                <p class="text-xs sm:text-sm text-slate-700 font-medium">Evaluar las limitantes que se le presentan a los propietarios para determinar sus conocimientos precarios y tecnológicos ante la relación con el SAT.</p>
+              </div>
+
+              <div class="flex gap-4 items-start p-4 bg-cartel-cream rounded-2xl border border-cartel-olive/10">
+                <span class="w-7 h-7 rounded-xl bg-cartel-olive text-cartel-gold flex items-center justify-center font-bold text-xs shrink-0 font-mono">3</span>
+                <p class="text-xs sm:text-sm text-slate-700 font-medium">Detectar los efectos de la informalidad como barreras sobre el acceso al crédito, la capacidad de capitalización, la estabilidad del ingreso familiar y la cobertura de seguridad social.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delimitación Triaxial (Sección 1.8) -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-cartel-olive/20">
+        <h3 class="font-display text-xl font-black text-cartel-oliveDark mb-4">Tres Ejes de Delimitación de la Investigación</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="p-5 rounded-2xl bg-cartel-cream border border-cartel-olive/15">
+            <span class="text-xs font-bold text-cartel-olive uppercase font-mono"><i class="fa-solid fa-earth-americas text-cartel-gold mr-1.5"></i> Delimitación Espacial</span>
+            <p class="text-xs text-slate-700 mt-2 leading-relaxed">Comunidad rural de <strong>Rancho Nuevo Limón</strong>, municipio de Tempoal de Sánchez, subregión de la Huasteca Alta de Veracruz (con proyección diagnóstica a 800 micro-negocios regionales).</p>
+          </div>
+          <div class="p-5 rounded-2xl bg-cartel-cream border border-cartel-olive/15">
+            <span class="text-xs font-bold text-cartel-olive uppercase font-mono"><i class="fa-solid fa-users-viewfinder text-cartel-gold mr-1.5"></i> Poblacional e Instrumental</span>
+            <p class="text-xs text-slate-700 mt-2 leading-relaxed">100% de propietarios y encargados de tienditas de abarrotes permanentes de la localidad, mediante cuestionarios estructurados Likert y entrevistas semiestructuradas.</p>
+          </div>
+          <div class="p-5 rounded-2xl bg-cartel-cream border border-cartel-olive/15">
+            <span class="text-xs font-bold text-cartel-olive uppercase font-mono"><i class="fa-solid fa-scale-balanced text-cartel-gold mr-1.5"></i> Delimitación Temática</span>
+            <p class="text-xs text-slate-700 mt-2 leading-relaxed">Microeconomía Rural y Derecho Fiscal: alfabetización tributaria (SAT Móvil), adopción de cobros digitales (mPOS/QR) y lógica básica del registro de ventas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARCO TEÓRICO, LEGAL Y GLOSARIO BUSCABLE -->
+    <section id="marco-teorico" class="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-cartel-olive/20 space-y-8">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-cartel-olive text-cartel-gold flex items-center justify-center text-lg shadow">
+            <i class="fa-solid fa-book-bookmark"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-cartel-olive uppercase font-mono">Capítulo II • Fundamentos y Normatividad</span>
+            <h2 class="font-display text-2xl sm:text-3xl font-black text-cartel-oliveDark">Marco Teórico, Legal y Glosario Conceptual</h2>
+          </div>
+        </div>
+        <!-- Buscador Interactivo -->
+        <div class="relative w-full md:w-72">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-cartel-olive text-xs"></i>
+          <input type="text" id="buscador-marco" placeholder="Filtrar conceptos o leyes..." class="w-full pl-9 pr-4 py-2.5 bg-cartel-cream border border-cartel-olive/30 rounded-xl text-xs font-semibold text-cartel-dark focus:outline-none focus:ring-2 focus:ring-cartel-olive">
+        </div>
+      </div>
+
+      <!-- Pestañas del Capítulo II -->
+      <div class="flex flex-wrap gap-2 border-b border-cartel-olive/15 pb-4">
+        <button onclick="cambiarTabMarco('bases', this)" class="marco-tab tab-active px-4 py-2 rounded-xl text-xs font-bold transition font-mono">Bases Teóricas (4)</button>
+        <button onclick="cambiarTabMarco('legal', this)" class="marco-tab bg-cartel-cream text-cartel-dark hover:bg-cartel-goldLight px-4 py-2 rounded-xl text-xs font-bold transition font-mono">Marco Legal Mexicano (4)</button>
+        <button onclick="cambiarTabMarco('glosario', this)" class="marco-tab bg-cartel-cream text-cartel-dark hover:bg-cartel-goldLight px-4 py-2 rounded-xl text-xs font-bold transition font-mono">Glosario Conceptual (6)</button>
+      </div>
+
+      <!-- Contenido Bases Teóricas -->
+      <div id="panel-bases" class="marco-panel grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="marco-item p-6 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+          <span class="text-[11px] font-bold text-cartel-olive font-mono">2.2.1 • Coase (1937) y Williamson (1981)</span>
+          <h3 class="font-display font-bold text-cartel-oliveDark text-base mt-1 mb-2">Teoría de los Costos de Transacción</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Los gastos indirectos asociados a buscar información, trasladarse a oficinas distantes del SAT, contratar asesoría contable y adquirir equipo digital superan las ganancias esperadas de formalizarse, haciendo de la informalidad una decisión económicamente racional en el entorno rural.</p>
+        </div>
+
+        <div class="marco-item p-6 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+          <span class="text-[11px] font-bold text-cartel-olive font-mono">2.2.2 • Alexander Chayanov (1974)</span>
+          <h3 class="font-display font-bold text-cartel-oliveDark text-base mt-1 mb-2">Enfoque de Economía de Subsistencia y Unidad Doméstica</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Los micro-negocios familiares rurales operan bajo una lógica de reproducción social y sustento del hogar, no de maximización corporativa. La caja del negocio y el gasto familiar se mezclan, percibiendo los impuestos como una resta directa al sustento diario.</p>
+        </div>
+
+        <div class="marco-item p-6 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+          <span class="text-[11px] font-bold text-cartel-olive font-mono">2.2.3 • Raccanello &amp; Herrera (2014)</span>
+          <h3 class="font-display font-bold text-cartel-oliveDark text-base mt-1 mb-2">Teoría de Inclusión Financiera y Brecha Digital</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">La exclusión del sistema bancario y la no adopción de terminales móviles (mPOS) o cobros QR/transferencias impiden construir un historial de ventas auditable, cerrando la puerta al crédito formal para capitalizar inventarios.</p>
+        </div>
+
+        <div class="marco-item p-6 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+          <span class="text-[11px] font-bold text-cartel-olive font-mono">2.2.4 • Art. 31 Fracción IV CPEUM</span>
+          <h3 class="font-display font-bold text-cartel-oliveDark text-base mt-1 mb-2">Principios del Derecho Tributario y Justicia Fiscal</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">La equidad y proporcionalidad tributaria exigen simplicidad administrativa real. Cuando las plataformas digitales demandan conectividad ausente en el campo, la autoridad debe transitar de un enfoque punitivo a capacitación comunitaria e incentivos tangibles.</p>
+        </div>
+      </div>
+
+      <!-- Contenido Marco Legal -->
+      <div id="panel-legal" class="marco-panel hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="marco-item p-6 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+          <span class="text-[11px] font-bold text-cartel-gold bg-cartel-oliveDark px-2.5 py-0.5 rounded font-mono">CPEUM • Artículos 25 y 31 Fracc. IV</span>
+          <h3 class="font-display font-bold text-cartel-oliveDark text-base mt-2 mb-2">Constitución Política de los Estados Unidos Mexicanos</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Establece la obligación de contribuir de manera proporcional y equitativa (Art. 31-IV) y la rectoría del Estado para fomentar el desarrollo económico y apoyar a las micro, pequeñas y medianas empresas rurales (Art. 25).</p>
+        </div>
+
+        <div class="marco-item p-6 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+          <span class="text-[11px] font-bold text-cartel-gold bg-cartel-oliveDark px-2.5 py-0.5 rounded font-mono">CFF • Artículos 27, 29 y 29-A</span>
+          <h3 class="font-display font-bold text-cartel-oliveDark text-base mt-2 mb-2">Código Fiscal de la Federación</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Regula la inscripción obligatoria en el Registro Federal de Contribuyentes (RFC) y actualización de actividades económicas (Art. 27), así como la expedición y recepción de Comprobantes Fiscales Digitales por Internet (CFDI) (Arts. 29 y 29-A).</p>
+        </div>
+
+        <div class="marco-item p-6 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+          <span class="text-[11px] font-bold text-cartel-gold bg-cartel-oliveDark px-2.5 py-0.5 rounded font-mono">LISR • Artículos 113-E al 113-J</span>
+          <h3 class="font-display font-bold text-cartel-oliveDark text-base mt-2 mb-2">Régimen Simplificado de Confianza (RESICO)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Esquema tributario diseñado para personas físicas con actividades empresariales de menores ingresos (hasta 3.5 millones de pesos anuales), aplicando tasas reducidas del 1% al 2.5% sobre ingresos efectivamente cobrados.</p>
+        </div>
+
+        <div class="marco-item p-6 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+          <span class="text-[11px] font-bold text-cartel-gold bg-cartel-oliveDark px-2.5 py-0.5 rounded font-mono">CNBV • Disposiciones de Inclusión Financiera</span>
+          <h3 class="font-display font-bold text-cartel-oliveDark text-base mt-2 mb-2">Ley para la Inclusión Financiera y Cuentas Nivel 2</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Norma la operación de Corresponsales Bancarios, terminales punto de venta móviles (mPOS) y cuentas de depósito simplificadas Nivel 2 (apertura remota con requisitos mínimos) ideales para zonas rurales sin sucursales.</p>
+        </div>
+      </div>
+
+      <!-- Contenido Glosario Conceptual -->
+      <div id="panel-glosario" class="marco-panel hidden grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="marco-item p-5 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+          <h3 class="font-display font-bold text-cartel-oliveDark text-sm mb-1.5">Informalidad Absoluta (Fiscal)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Unidades económicas que operan totalmente al margen del SAT, sin RFC y sin emitir ni solicitar comprobantes fiscales digitales (CFDI).</p>
+        </div>
+        <div class="marco-item p-5 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+          <h3 class="font-display font-bold text-cartel-oliveDark text-sm mb-1.5">Micro-negocio Rural de Subsistencia</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Comercio minorista de reducida escala administrado empíricamente por la familia, cuyo flujo se destina a cubrir necesidades básicas del hogar.</p>
+        </div>
+        <div class="marco-item p-5 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+          <h3 class="font-display font-bold text-cartel-oliveDark text-sm mb-1.5">Lógica del Registro de Ventas</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Disciplina contable básica para separar el dinero del negocio del presupuesto familiar mediante el control diario de entradas, costos y margen.</p>
+        </div>
+        <div class="marco-item p-5 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+          <h3 class="font-display font-bold text-cartel-oliveDark text-sm mb-1.5">Herramientas Digitales de Cobro</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Terminales punto de venta móviles (mPOS), transferencias SPEI y códigos QR que permiten vender sin depender del efectivo circulante.</p>
+        </div>
+        <div class="marco-item p-5 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+          <h3 class="font-display font-bold text-cartel-oliveDark text-sm mb-1.5">Fricción y Costos Fiscales</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Gastos indirectos de tiempo, transporte y esfuerzo para cumplir obligaciones normativas en comunidades alejadas de centros urbanos.</p>
+        </div>
+        <div class="marco-item p-5 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+          <h3 class="font-display font-bold text-cartel-oliveDark text-sm mb-1.5">Inclusión Financiera Rural</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Incorporación de tenderos campesinos al sistema regulado (bancos o SOFIPOs) mediante cuentas de ahorro, medios de pago y crédito productivo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- METODOLOGÍA, OPERACIONALIZACIÓN Y ESCALA LIKERT -->
+    <section id="metodologia" class="bg-gradient-to-br from-cartel-oliveDark to-cartel-olive text-white rounded-3xl p-8 sm:p-10 shadow-xl border border-cartel-gold space-y-8">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-cartel-gold text-cartel-oliveDark flex items-center justify-center text-lg font-bold shadow">
+          <i class="fa-solid fa-chart-pie"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-cartel-gold uppercase font-mono">Capítulo III • Operacionalización de Variables</span>
+          <h2 class="font-display text-2xl sm:text-3xl font-black text-cartel-goldLight">Metodología Mixta y Matriz de Variables</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="bg-black/25 p-6 rounded-2xl border border-white/15 space-y-3">
+          <span class="px-2.5 py-0.5 rounded bg-cartel-gold text-cartel-oliveDark text-[11px] font-bold font-mono">VARIABLE INDEPENDIENTE (VI)</span>
+          <h3 class="font-display font-bold text-cartel-gold text-lg">Capacitación fiscal en RESICO y lógica del registro de ventas</h3>
+          <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+            Proceso teórico-práctico orientado a brindar conocimientos sobre tasas reducidas (1% a 2.5%), requisitos de RFC/e.firma y disciplina contable básica para separar el patrimonio familiar del negocio.
+          </p>
+          <div class="pt-2 border-t border-white/10 text-[11px] text-slate-300 font-mono">
+            <strong>Dimensiones:</strong> 1. Conocimiento del RESICO (Ítems 1–3) • 2. Gestión y registro contable (Ítems 4–6)
+          </div>
+        </div>
+
+        <div class="bg-black/25 p-6 rounded-2xl border border-white/15 space-y-3">
+          <span class="px-2.5 py-0.5 rounded bg-cartel-gold text-cartel-oliveDark text-[11px] font-bold font-mono">VARIABLE DEPENDIENTE (VD)</span>
+          <h3 class="font-display font-bold text-cartel-gold text-lg">Formalización, bancarización y desempeño comercial</h3>
+          <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+            Disposición a la inscripción en el RFC, resguardo de utilidades en cuentas reguladas (bancos/SOFIPOs), adopción de cobros digitales mPOS/QR, certeza jurídica y crecimiento en ventas (+18%).
+          </p>
+          <div class="pt-2 border-t border-white/10 text-[11px] text-slate-300 font-mono">
+            <strong>Dimensiones:</strong> 1. Certidumbre Fiscal (7–8) • 2. Inclusión Digital (9–11) • 3. Desempeño Comercial (12–13)
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla Matriz de Operacionalización -->
+      <div class="overflow-x-auto bg-black/20 rounded-2xl border border-white/15">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b border-cartel-gold/40 text-cartel-gold font-mono uppercase">
+              <th class="p-4">Variable</th>
+              <th class="p-4">Dimensiones</th>
+              <th class="p-4">Indicadores Clave del Instrumento</th>
+              <th class="p-4">Ítems</th>
+              <th class="p-4">Escala</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/10 text-slate-200">
+            <tr>
+              <td class="p-4 font-bold text-white" rowspan="2">Capacitación Fiscal y Contable (VI)</td>
+              <td class="p-4 font-semibold text-cartel-goldLight">1. Conocimiento del RESICO</td>
+              <td class="p-4">Información sobre cuotas (1%–2.5%) y requisitos de tramitación RFC / e.firma.</td>
+              <td class="p-4 font-mono">1, 2, 3</td>
+              <td class="p-4 font-mono">Likert (1–5)</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-cartel-goldLight">2. Gestión y Registro Contable</td>
+              <td class="p-4">Frecuencia de registro diario de compras/ventas, separación de gasto familiar y archivo de CFDI.</td>
+              <td class="p-4 font-mono">4, 5, 6</td>
+              <td class="p-4 font-mono">Likert (1–5)</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-white" rowspan="3">Formalización y Desempeño (VD)</td>
+              <td class="p-4 font-semibold text-cartel-goldLight">1. Disposición y Certidumbre</td>
+              <td class="p-4">Disposición a inscribirse al SAT en RESICO y percepción de tranquilidad frente a multas.</td>
+              <td class="p-4 font-mono">7, 8</td>
+              <td class="p-4 font-mono">Likert (1–5)</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-cartel-goldLight">2. Inclusión Financiera y Digital</td>
+              <td class="p-4">Uso de cuentas en bancos o SOFIPOs y aceptación de cobros digitales (mPOS, transferencias, QR).</td>
+              <td class="p-4 font-mono">9, 10, 11</td>
+              <td class="p-4 font-mono">Likert (1–5)</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-cartel-goldLight">3. Desempeño Comercial</td>
+              <td class="p-4">Crecimiento percibido en ventas totales y capacidad de reinversión en inventario.</td>
+              <td class="p-4 font-mono">12, 13</td>
+              <td class="p-4 font-mono">Likert (1–5)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- NUEVAS HERRAMIENTAS INTERACTIVAS DE MICROECONOMÍA Y CONTABILIDAD RURAL -->
+    <section id="herramientas-rurales" class="space-y-10">
+      <div class="text-center max-w-3xl mx-auto">
+        <span class="inline-block px-3.5 py-1 bg-cartel-olive text-cartel-gold text-xs font-bold rounded-full uppercase font-mono mb-2">Laboratorio Interactivo del Protocolo</span>
+        <h2 class="font-display text-2xl sm:text-4xl font-black text-cartel-oliveDark">Herramientas Aplicadas al Comercio Rural</h2>
+        <p class="text-xs sm:text-sm text-slate-600 mt-2">Gadgets interactivos diseñados con base en las teorías de Coase, Chayanov y Raccanello &amp; Herrera para evaluar la viabilidad de formalización en la Huasteca.</p>
+      </div>
+
+      <!-- GADGET 1: SIMULADOR DE COSTOS DE TRANSACCIÓN (COASE) E IMPACTO mPOS -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-cartel-olive/20">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-cartel-olive/15 pb-5 mb-6">
+          <div>
+            <span class="text-xs font-bold text-cartel-olive uppercase font-mono">Gadget 01 • Teoría de Coase &amp; López-Martínez (2024)</span>
+            <h3 class="font-display text-xl sm:text-2xl font-black text-cartel-oliveDark">Simulador de Costos de Transacción Rural vs. Beneficio Digital (mPOS)</h3>
+          </div>
+          <div class="w-11 h-11 rounded-2xl bg-cartel-cream border border-cartel-olive/20 text-cartel-olive flex items-center justify-center text-xl">
+            <i class="fa-solid fa-route"></i>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-6 space-y-5">
+            <div>
+              <div class="flex justify-between text-xs font-bold text-cartel-oliveDark mb-1.5">
+                <span>Ventas Mensuales Actuales en Efectivo:</span>
+                <span id="lbl-sim-ventas" class="font-mono text-cartel-olive">$25,000 MXN</span>
+              </div>
+              <input type="range" id="sim-ventas" min="5000" max="120000" step="1000" value="25000" class="w-full accent-[#3b4a2f] cursor-pointer">
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-bold text-cartel-oliveDark mb-1.5">
+                <span>Distancia a Oficina SAT / Banco más cercana (ida y vuelta):</span>
+                <span id="lbl-sim-distancia" class="font-mono text-cartel-olive">140 km (Tempoal ↔ Pánuco)</span>
+              </div>
+              <input type="range" id="sim-distancia" min="20" max="280" step="10" value="140" class="w-full accent-[#3b4a2f] cursor-pointer">
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-bold text-cartel-oliveDark mb-1.5">
+                <span>Costo de Pasajes + Jornada Laboral Perdida por Trámite:</span>
+                <span id="lbl-sim-traslado" class="font-mono text-cartel-olive">$650 MXN / visita</span>
+              </div>
+              <input type="range" id="sim-traslado" min="150" max="2000" step="50" value="650" class="w-full accent-[#3b4a2f] cursor-pointer">
+            </div>
+
+            <div class="flex items-center justify-between p-4 bg-cartel-cream rounded-2xl border border-cartel-olive/20">
+              <div>
+                <span class="block text-xs font-bold text-cartel-oliveDark">Activar Gestión Remota (SAT Móvil + Cuenta Nivel 2 + mPOS)</span>
+                <span class="text-[11px] text-slate-500">Reduce viajes físicos y proyecta +18% en ventas por cobro con tarjeta/QR</span>
+              </div>
+              <input type="checkbox" id="sim-digital" checked class="w-5 h-5 accent-[#3b4a2f] rounded cursor-pointer">
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="bg-cartel-cream p-5 rounded-2xl border border-cartel-olive/20">
+              <span class="text-[11px] font-bold text-slate-500 uppercase font-mono">Fricción Anual por Traslados</span>
+              <span id="res-sim-friccion" class="block font-display text-2xl font-black text-red-600 mt-1">$1,300 MXN</span>
+              <span id="res-sim-friccion-desc" class="text-[11px] text-slate-600 mt-1 block">2 visitas anuales con gestión móvil</span>
+            </div>
+
+            <div class="bg-cartel-cream p-5 rounded-2xl border border-cartel-olive/20">
+              <span class="text-[11px] font-bold text-slate-500 uppercase font-mono">Incremento Ventas mPOS (+18%)</span>
+              <span id="res-sim-extra" class="block font-display text-2xl font-black text-emerald-700 mt-1">+$4,500 MXN</span>
+              <span class="text-[11px] text-slate-600 mt-1 block">Ingreso adicional mensual proyectado</span>
+            </div>
+
+            <div class="bg-cartel-cream p-5 rounded-2xl border border-cartel-olive/20">
+              <span class="text-[11px] font-bold text-slate-500 uppercase font-mono">ISR Mensual RESICO (1.0%–1.1%)</span>
+              <span id="res-sim-isr" class="block font-display text-2xl font-black text-cartel-oliveDark mt-1">$325 MXN</span>
+              <span class="text-[11px] text-slate-600 mt-1 block">Sobre ventas totales formalizadas</span>
+            </div>
+
+            <div class="bg-cartel-olive text-white p-5 rounded-2xl border border-cartel-gold shadow-md">
+              <span class="text-[11px] font-bold text-cartel-gold uppercase font-mono">Beneficio Neto Mensual</span>
+              <span id="res-sim-neto" class="block font-display text-2xl font-black text-white mt-1">+$4,067 MXN</span>
+              <span class="text-[11px] text-slate-200 mt-1 block">Supera ampliamente el costo fiscal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GADGET 2: CUADERNO CONTABLE DIGITAL DE SUBSISTENCIA (CHAYANOV) -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-cartel-olive/20">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-cartel-olive/15 pb-5 mb-6">
+          <div>
+            <span class="text-xs font-bold text-cartel-olive uppercase font-mono">Gadget 02 • Lógica del Registro de Ventas (Chayanov, 1974)</span>
+            <h3 class="font-display text-xl sm:text-2xl font-black text-cartel-oliveDark">Cuaderno Contable Digital: Caja del Negocio vs. Gasto Familiar</h3>
+            <p class="text-xs text-slate-600 mt-1">Registra movimientos diarios de una tiendita rural para separar el flujo comercial del sustento doméstico.</p>
+          </div>
+          <button onclick="reiniciarCuaderno()" class="self-start sm:self-auto px-3.5 py-2 rounded-xl bg-cartel-cream hover:bg-cartel-goldLight border border-cartel-olive/20 text-xs font-bold text-cartel-oliveDark font-mono">
+            <i class="fa-solid fa-rotate-left mr-1"></i> Restaurar Ejemplo
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <!-- Formulario de Movimiento -->
+          <div class="lg:col-span-5 space-y-4 bg-cartel-cream p-5 rounded-2xl border border-cartel-olive/15">
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-cartel-olive mb-1 font-mono">Tipo de Movimiento</label>
+              <select id="mov-tipo" class="w-full bg-white border border-cartel-olive/30 rounded-xl px-3.5 py-2.5 text-xs font-bold text-cartel-dark">
+                <option value="venta">Ingreso: Venta del Día (Mostrador / QR)</option>
+                <option value="proveedor">Egreso Negocio: Compra a Proveedor (Surtido)</option>
+                <option value="familiar">Retiro Familiar: Gasto del Hogar / Autoconsumo</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-cartel-olive mb-1 font-mono">Concepto</label>
+              <input type="text" id="mov-concepto" placeholder="Ej. Venta abarrotes turno matutino" class="w-full bg-white border border-cartel-olive/30 rounded-xl px-3.5 py-2.5 text-xs font-semibold text-cartel-dark">
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-bold uppercase text-cartel-olive mb-1 font-mono">Monto (MXN)</label>
+                <input type="number" id="mov-monto" value="850" min="1" class="w-full bg-white border border-cartel-olive/30 rounded-xl px-3.5 py-2.5 text-xs font-bold text-cartel-dark">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold uppercase text-cartel-olive mb-1 font-mono">¿Cuenta con CFDI?</label>
+                <select id="mov-cfdi" class="w-full bg-white border border-cartel-olive/30 rounded-xl px-3.5 py-2.5 text-xs font-bold text-cartel-dark">
+                  <option value="si">Sí (Factura / Ticket)</option>
+                  <option value="no">No (Nota Informal)</option>
+                </select>
+              </div>
+            </div>
+            <button onclick="agregarMovimiento()" class="w-full py-3 bg-cartel-olive hover:bg-cartel-oliveDark text-white font-bold text-xs uppercase rounded-xl transition shadow flex items-center justify-center gap-2 font-mono">
+              <i class="fa-solid fa-plus text-cartel-gold"></i> Registrar en Libreta Digital
+            </button>
+          </div>
+
+          <!-- Resumen y Lista -->
+          <div class="lg:col-span-7 space-y-4">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200">
+                <span class="text-[10px] font-bold text-emerald-800 uppercase block">Ventas Totales</span>
+                <span id="cua-ventas" class="font-display text-lg font-black text-emerald-900">$0</span>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-amber-50 border border-amber-200">
+                <span class="text-[10px] font-bold text-amber-800 uppercase block">Costo Proveedores</span>
+                <span id="cua-proveedores" class="font-display text-lg font-black text-amber-900">$0</span>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-red-50 border border-red-200">
+                <span class="text-[10px] font-bold text-red-800 uppercase block">Retiro Familiar</span>
+                <span id="cua-familiar" class="font-display text-lg font-black text-red-900">$0</span>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-cartel-olive text-white border border-cartel-gold">
+                <span class="text-[10px] font-bold text-cartel-gold uppercase block">Flujo Neto Caja</span>
+                <span id="cua-flujo" class="font-display text-lg font-black text-white">$0</span>
+              </div>
+            </div>
+
+            <div class="bg-cartel-cream rounded-2xl border border-cartel-olive/15 overflow-hidden">
+              <div class="max-h-56 overflow-y-auto divide-y divide-cartel-olive/10" id="lista-movimientos"></div>
+            </div>
+            <p id="cua-consejo" class="text-xs font-semibold text-cartel-oliveDark bg-cartel-goldLight p-3 rounded-xl border border-cartel-gold/40"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GADGET 3: DIAGNÓSTICO DE MADUREZ DIGITAL Y RUTA DE FORMALIZACIÓN -->
+      <div class="bg-gradient-to-br from-cartel-oliveDark to-cartel-olive text-white rounded-3xl p-6 sm:p-10 shadow-xl border border-cartel-gold">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/15 pb-5 mb-6">
+          <div>
+            <span class="text-xs font-bold text-cartel-gold uppercase font-mono">Gadget 03 • Autoevaluación Rápida del Tendero</span>
+            <h3 class="font-display text-xl sm:text-2xl font-black text-cartel-goldLight">Diagnóstico de Preparación Fiscal y Digital (5 Criterios)</h3>
+          </div>
+          <span id="diag-puntaje-badge" class="px-4 py-1.5 rounded-full bg-cartel-gold text-cartel-oliveDark font-bold text-xs font-mono">Nivel: En Transición</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-3 text-xs sm:text-sm">
+            <label class="flex items-center gap-3 p-3.5 rounded-2xl bg-black/25 border border-white/10 cursor-pointer hover:bg-black/35 transition">
+              <input type="checkbox" class="diag-check w-4 h-4 accent-[#d4af37]" checked onchange="evaluarDiagnostico()">
+              <span>1. El propietario cuenta con teléfono inteligente (smartphone) y acceso ocasional a datos o Wi-Fi.</span>
+            </label>
+            <label class="flex items-center gap-3 p-3.5 rounded-2xl bg-black/25 border border-white/10 cursor-pointer hover:bg-black/35 transition">
+              <input type="checkbox" class="diag-check w-4 h-4 accent-[#d4af37]" checked onchange="evaluarDiagnostico()">
+              <span>2. Separa diariamente el dinero de las ventas respecto al gasto de alimentación del hogar.</span>
+            </label>
+            <label class="flex items-center gap-3 p-3.5 rounded-2xl bg-black/25 border border-white/10 cursor-pointer hover:bg-black/35 transition">
+              <input type="checkbox" class="diag-check w-4 h-4 accent-[#d4af37]" onchange="evaluarDiagnostico()">
+              <span>3. Posee una cuenta bancaria básica (Nivel 2) o cuenta en SOFIPO a su nombre.</span>
+            </label>
+            <label class="flex items-center gap-3 p-3.5 rounded-2xl bg-black/25 border border-white/10 cursor-pointer hover:bg-black/35 transition">
+              <input type="checkbox" class="diag-check w-4 h-4 accent-[#d4af37]" onchange="evaluarDiagnostico()">
+              <span>4. Conserva notas o facturas de compra de sus proveedores mayoristas de la cabecera municipal.</span>
+            </label>
+            <label class="flex items-center gap-3 p-3.5 rounded-2xl bg-black/25 border border-white/10 cursor-pointer hover:bg-black/35 transition">
+              <input type="checkbox" class="diag-check w-4 h-4 accent-[#d4af37]" onchange="evaluarDiagnostico()">
+              <span>5. Está dispuesto a aceptar transferencias o cobros con tarjeta (mPOS) para atraer más clientes.</span>
+            </label>
+          </div>
+
+          <div class="lg:col-span-5 bg-cartel-cream text-cartel-dark rounded-3xl p-6 border-2 border-cartel-gold space-y-4">
+            <span class="text-[11px] font-black uppercase text-cartel-olive font-mono block">Ruta Recomendada por el Protocolo ITSP</span>
+            <h4 id="diag-titulo" class="font-display text-xl font-black text-cartel-oliveDark">Etapa 2: Ordenamiento Contable y Cuenta Nivel 2</h4>
+            <p id="diag-texto" class="text-xs text-slate-700 leading-relaxed">
+              Ya cuentas con conectividad básica y control inicial. El siguiente paso recomendado es abrir una cuenta bancaria Nivel 2 sin comisiones y comenzar a registrar compras a proveedores antes de tramitar tu RFC en RESICO.
+            </p>
+            <div class="pt-3 border-t border-cartel-olive/15">
+              <div class="flex justify-between text-[11px] font-bold text-cartel-olive mb-1 font-mono">
+                <span>Índice de Madurez Digital-Fiscal</span>
+                <span id="diag-porcentaje">40%</span>
+              </div>
+              <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                <div id="diag-barra" class="h-full bg-cartel-olive transition-all duration-300" style="width: 40%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXCLUSIVO EXTRA: CALCULADORA FISCAL PROFESIONAL AMPLIADA -->
+    <section id="calculadora-fiscal" class="bg-white rounded-3xl p-6 sm:p-10 shadow-2xl border-2 border-cartel-gold">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-cartel-olive/20 pb-6 mb-8">
+        <div>
+          <span class="inline-block px-3 py-1 bg-cartel-gold text-cartel-oliveDark text-xs font-bold rounded-lg uppercase font-mono mb-2">Herramienta Contable Exclusiva</span>
+          <h2 class="font-display text-2xl sm:text-3xl font-black text-cartel-oliveDark">Calculadora Fiscal Pro (Personas Físicas y Morales)</h2>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Calcula con rigor técnico el impuesto a cargo o saldo a favor, considerando ingresos, deducciones, PTU pagada, pérdidas fiscales, pagos provisionales y retenciones conforme a la LISR.</p>
+        </div>
+        <div class="w-12 h-12 rounded-2xl bg-cartel-olive text-cartel-gold flex items-center justify-center text-2xl shadow shrink-0">
+          <i class="fa-solid fa-calculator"></i>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Controles del Formulario -->
+        <div class="lg:col-span-6 space-y-5">
+          
+          <div>
+            <label class="block text-xs font-bold uppercase text-cartel-olive mb-2 font-mono">Tipo de Contribuyente</label>
+            <select id="tipo-contribuyente" class="w-full bg-cartel-cream border border-cartel-olive/30 rounded-xl px-4 py-3 text-sm font-semibold text-cartel-dark focus:outline-none focus:ring-2 focus:ring-cartel-olive">
+              <option value="fisica">Persona Física (Actividad Empresarial / RESICO)</option>
+              <option value="moral">Persona Moral (Régimen General / LISR)</option>
+            </select>
+          </div>
+
+          <div id="grupo-regimen-fisica">
+            <label class="block text-xs font-bold uppercase text-cartel-olive mb-2 font-mono">Régimen Fiscal (Persona Física)</label>
+            <select id="regimen-fisica" class="w-full bg-cartel-cream border border-cartel-olive/30 rounded-xl px-4 py-3 text-sm font-semibold text-cartel-dark focus:outline-none focus:ring-2 focus:ring-cartel-olive">
+              <option value="resico">Régimen Simplificado de Confianza (RESICO) - Tasa 1% a 2.5%</option>
+              <option value="empresarial">Actividad Empresarial y Profesional (Tarifa Progresiva ISR)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-cartel-olive mb-2 font-mono">Ingresos Acumulables (MXN)</label>
+              <input type="number" id="input-ingresos" value="35000" min="0" step="1000" class="w-full bg-cartel-cream border border-cartel-olive/30 rounded-xl px-4 py-3 text-sm font-bold text-cartel-dark focus:outline-none focus:ring-2 focus:ring-cartel-olive">
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-cartel-olive mb-2 font-mono">Deducciones Autorizadas (MXN)</label>
+              <input type="number" id="input-deducciones" value="12000" min="0" step="500" class="w-full bg-cartel-cream border border-cartel-olive/30 rounded-xl px-4 py-3 text-sm font-bold text-cartel-dark focus:outline-none focus:ring-2 focus:ring-cartel-olive">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-cartel-olive mb-2 font-mono">Pagos Provisionales Previos (MXN)</label>
+              <input type="number" id="input-provisionales" value="0" min="0" step="100" class="w-full bg-cartel-cream border border-cartel-olive/30 rounded-xl px-4 py-3 text-sm font-bold text-cartel-dark focus:outline-none focus:ring-2 focus:ring-cartel-olive">
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-cartel-olive mb-2 font-mono">Pérdidas Fiscales de Ejercicios Anteriores</label>
+              <input type="number" id="input-perdidas" value="0" min="0" step="500" class="w-full bg-cartel-cream border border-cartel-olive/30 rounded-xl px-4 py-3 text-sm font-bold text-cartel-dark focus:outline-none focus:ring-2 focus:ring-cartel-olive">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-cartel-olive mb-2 font-mono">PTU Pagada en el Ejercicio (MXN)</label>
+              <input type="number" id="input-ptu" value="0" min="0" step="100" class="w-full bg-cartel-cream border border-cartel-olive/30 rounded-xl px-4 py-3 text-sm font-bold text-cartel-dark focus:outline-none focus:ring-2 focus:ring-cartel-olive">
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-cartel-olive mb-2 font-mono">ISR Retenido (Bancos / PM 1.25%)</label>
+              <input type="number" id="input-retenciones" value="0" min="0" step="50" class="w-full bg-cartel-cream border border-cartel-olive/30 rounded-xl px-4 py-3 text-sm font-bold text-cartel-dark focus:outline-none focus:ring-2 focus:ring-cartel-olive">
+            </div>
+          </div>
+
+          <button onclick="calcularImpuestos()" class="w-full py-4 bg-cartel-olive hover:bg-cartel-oliveDark text-white font-bold uppercase tracking-wider rounded-xl transition shadow-lg flex items-center justify-center gap-2 font-mono text-xs">
+            <i class="fa-solid fa-calculator text-cartel-gold"></i> Calcular Saldo Fiscal a Cubrir
+          </button>
+        </div>
+
+        <!-- Resultados del Cálculo -->
+        <div class="lg:col-span-6 bg-cartel-cream border-2 border-cartel-olive/20 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-inner">
+          <div class="space-y-6">
+            <div class="flex items-center justify-between border-b border-cartel-olive/20 pb-4">
+              <span class="text-xs font-black uppercase tracking-wider text-cartel-olive font-mono">Desglose Técnico Fiscal</span>
+              <span id="badge-regimen-activo" class="px-3 py-1 bg-cartel-gold text-cartel-oliveDark rounded-full text-xs font-bold font-mono">RESICO Persona Física</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-white p-4 rounded-2xl border border-cartel-olive/10 shadow-sm">
+                <span class="text-[11px] text-slate-500 font-bold block">Base Gravable Neta</span>
+                <span id="res-base-gravable" class="font-display text-xl sm:text-2xl font-black text-cartel-oliveDark">$35,000 MXN</span>
+              </div>
+              <div class="bg-white p-4 rounded-2xl border border-cartel-olive/10 shadow-sm">
+                <span class="text-[11px] text-slate-500 font-bold block">Tasa Aplicable Estimada</span>
+                <span id="res-tasa" class="font-display text-xl sm:text-2xl font-black text-cartel-gold">1.10%</span>
+              </div>
+            </div>
+
+            <div class="space-y-2.5 text-xs text-slate-700 bg-white p-5 rounded-2xl border border-cartel-olive/10">
+              <div class="flex justify-between">
+                <span>ISR Bruto Calculado:</span>
+                <span id="res-isr-bruto" class="font-bold text-slate-900 font-mono">$385.00 MXN</span>
+              </div>
+              <div class="flex justify-between">
+                <span>(-) Pagos Provisionales Acreditables:</span>
+                <span id="res-prov" class="font-bold text-slate-900 font-mono">$0.00 MXN</span>
+              </div>
+              <div class="flex justify-between">
+                <span>(-) Retenciones Bancarias / Terceros:</span>
+                <span id="res-ret" class="font-bold text-slate-900 font-mono">$0.00 MXN</span>
+              </div>
+              <div class="pt-3 border-t border-slate-200 flex justify-between items-center text-sm font-black">
+                <span id="lbl-resultado-final" class="text-cartel-oliveDark">Saldo Neto a Cubrir:</span>
+                <span id="res-total-pagar" class="font-display text-xl text-red-600 font-black font-mono">$385.00 MXN</span>
+              </div>
+            </div>
+
+            <p id="nota-fiscal-regimen" class="text-[11px] text-slate-600 bg-cartel-goldLight p-3.5 rounded-xl border border-cartel-olive/15 leading-relaxed">
+              En RESICO Persona Física (Art. 113-E LISR), el impuesto se calcula directamente sobre los ingresos efectivamente cobrados sin aplicar deducciones en el pago provisional, gozando de tasas mínimas de 1% a 2.5%.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-cartel-olive/20 text-[11px] text-slate-500 font-semibold flex items-center justify-between font-mono">
+            <span>Simulación basada en Ley del ISR 2026</span>
+            <span class="text-emerald-600">Calculadora Verificada</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- SECCIÓN ANEXOS Y GENERADOR DE QR DINÁMICO -->
+    <section id="qr-seccion" class="bg-cartel-oliveDark text-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-cartel-gold/40">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <div class="lg:col-span-7 space-y-6">
+          <span class="inline-block px-3.5 py-1.5 bg-white/10 text-cartel-gold text-xs font-bold uppercase tracking-wider rounded-full font-mono">
+            Instrumento de Campo y Publicación Web
+          </span>
+          <h2 class="font-display text-2xl sm:text-4xl font-black text-cartel-goldLight">
+            Cuestionario de Investigación y Generador de Código QR
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Escanea el código QR para abrir el instrumento oficial de Google Forms aplicado en Rancho Nuevo Limón, o pega abajo la URL donde alojes esta página (ej. GitHub Pages) para generar al instante el QR personalizado para tu cartel.
+          </p>
+
+          <!-- Generador Personalizado de URL para el QR -->
+          <div class="bg-black/25 p-4 rounded-2xl border border-white/15 space-y-3">
+            <label class="block text-[11px] font-bold uppercase text-cartel-gold font-mono">Personalizar destino del Código QR:</label>
+            <div class="flex flex-col sm:flex-row gap-2">
+              <input type="url" id="input-qr-url" value="https://docs.google.com/forms/d/e/1FAIpQLScZ13gtDAUg7A8QsBlxnH1YUCdON8-BU-oFe4gk5wla0oNdYA/viewform?usp=header" placeholder="Pega aquí tu enlace de GitHub Pages o Google Forms..." class="flex-1 bg-white/10 border border-white/25 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cartel-gold">
+              <button onclick="actualizarQR()" class="bg-cartel-gold hover:bg-amber-400 text-cartel-oliveDark font-bold text-xs px-4 py-2.5 rounded-xl transition font-mono shrink-0">
+                Actualizar QR
+              </button>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-4 pt-1">
+            <a id="btn-abrir-enlace" href="https://docs.google.com/forms/d/e/1FAIpQLScZ13gtDAUg7A8QsBlxnH1YUCdON8-BU-oFe4gk5wla0oNdYA/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="bg-cartel-gold hover:bg-amber-400 text-cartel-oliveDark font-bold text-sm px-6 py-3.5 rounded-2xl transition shadow-xl flex items-center gap-2">
+              <i class="fa-solid fa-up-right-from-square"></i> Abrir Enlace Activo
+            </a>
+            <button onclick="copiarEnlace()" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold text-sm px-6 py-3.5 rounded-2xl transition flex items-center gap-2 font-mono">
+              <i class="fa-solid fa-link text-cartel-gold"></i> Copiar Enlace
+            </button>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="bg-cartel-cream text-cartel-dark rounded-3xl p-6 max-w-xs w-full shadow-2xl text-center border-4 border-cartel-gold">
+            <p class="text-xs font-black uppercase tracking-wider text-cartel-olive mb-1 font-mono">Código QR del Protocolo</p>
+            <p class="text-[11px] text-slate-500 mb-4 font-semibold">Micro-Negocios Rurales Tempoal</p>
+            
+            <div class="bg-white p-3 rounded-2xl border-2 border-cartel-olive/20 inline-block mx-auto shadow-inner">
+              <img 
+                id="img-qr-code"
+                src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&color=3b4a2f&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLScZ13gtDAUg7A8QsBlxnH1YUCdON8-BU-oFe4gk5wla0oNdYA%2Fviewform%3Fusp%3Dheader" 
+                alt="Código QR"
+                class="w-40 h-40 mx-auto rounded-xl"
+              >
+            </div>
+            <p class="text-[11px] text-slate-600 mt-4 font-semibold">Haz clic derecho sobre el QR para guardarlo e insertarlo en Impress.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+</main>
+<section id="equipo" class="max-w-7xl mx-auto px-4 sm:px-6 pb-14">
+  <div class="bg-white rounded-3xl p-8 sm:p-10 border border-cartel-olive/15 shadow-xl">
+    <h2 class="font-display text-2xl sm:text-3xl font-black text-cartel-oliveDark mb-6">Equipo de Investigación</h2>
+    <div class="grid sm:grid-cols-3 gap-4">
+      <div class="rounded-2xl bg-cartel-cream p-5 border border-cartel-olive/15"><p class="font-bold text-cartel-oliveDark">Nombre del autor 1</p><p class="text-xs text-slate-600">Contador Público · ITSP</p></div>
+      <div class="rounded-2xl bg-cartel-cream p-5 border border-cartel-olive/15"><p class="font-bold text-cartel-oliveDark">Nombre del autor 2</p><p class="text-xs text-slate-600">Contador Público · ITSP</p></div>
+      <div class="rounded-2xl bg-cartel-cream p-5 border border-cartel-olive/15"><p class="font-bold text-cartel-oliveDark">Asesor(a)</p><p class="text-xs text-slate-600">Docente · ITSP</p></div>
+    </div>
+  </div>
+</section>
+<footer class="bg-cartel-oliveDark text-slate-300 text-xs text-center py-8 px-4">Cartel Digital Interactivo · Instituto Tecnológico Superior de Pánuco · Contador Público</footer>
+<div id="toast" class="fixed bottom-6 right-6 z-[60] bg-cartel-oliveDark text-white px-5 py-3 rounded-2xl shadow-2xl border border-cartel-gold/50 text-sm font-semibold translate-y-20 opacity-0"><span id="toast-message"></span></div>
+  <!-- SCRIPT DE LÓGICA, SIMULADORES Y CALCULADORA FISCAL -->
+  <script>
+    // 1. Menú móvil
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // 2. Toast
+    function mostrarToast(mensaje) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').textContent = mensaje;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3500);
+    }
+
+    function copiarEnlace() {
+      const url = document.getElementById('input-qr-url').value.trim();
+      const textarea = document.createElement('textarea');
+      textarea.value = url;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      mostrarToast('¡Enlace copiado al portapapeles!');
+    }
+
+    function actualizarQR() {
+      const url = document.getElementById('input-qr-url').value.trim();
+      if (!url) {
+        mostrarToast('Por favor ingresa una URL válida.');
+        return;
+      }
+      const qrImg = document.getElementById('img-qr-code');
+      const btnAbrir = document.getElementById('btn-abrir-enlace');
+      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&color=3b4a2f&data=${encodeURIComponent(url)}`;
+      btnAbrir.href = url;
+      mostrarToast('¡Código QR actualizado con tu nueva dirección web!');
+    }
+
+    // 3. Pestañas y Buscador del Marco Teórico / Legal / Glosario
+    function cambiarTabMarco(tabId, btn) {
+      document.querySelectorAll('.marco-panel').forEach(p => p.classList.add('hidden'));
+      document.getElementById('panel-' + tabId).classList.remove('hidden');
+
+      document.querySelectorAll('.marco-tab').forEach(b => {
+        b.classList.remove('tab-active');
+        b.classList.add('bg-cartel-cream', 'text-cartel-dark');
+      });
+      btn.classList.add('tab-active');
+      btn.classList.remove('bg-cartel-cream', 'text-cartel-dark');
+    }
+
+    document.getElementById('buscador-marco').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      document.querySelectorAll('.marco-item').forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(q) ? '' : 'none';
+      });
+    });
+
+    // 4. Simulador de Costos de Transacción (Coase) & mPOS
+    const fmtMXN = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 });
+    const fmtMXNDec = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 2 });
+
+    function actualizarSimuladorRural() {
+      const ventas = parseFloat(document.getElementById('sim-ventas').value) || 0;
+      const dist = parseFloat(document.getElementById('sim-distancia').value) || 0;
+      const traslado = parseFloat(document.getElementById('sim-traslado').value) || 0;
+      const digital = document.getElementById('sim-digital').checked;
+
+      document.getElementById('lbl-sim-ventas').textContent = fmtMXN.format(ventas) + ' MXN';
+      document.getElementById('lbl-sim-distancia').textContent = `${dist} km (ida y vuelta)`;
+      document.getElementById('lbl-sim-traslado').textContent = fmtMXN.format(traslado) + ' MXN / visita';
+
+      const visitasAnuales = digital ? 2 : 12;
+      const friccionAnual = visitasAnuales * traslado;
+      const extraMpos = digital ? ventas * 0.18 : 0;
+      const ventasTotales = ventas + extraMpos;
+      const tasaResico = calcularTasaResicoFisica(ventasTotales);
+      const isrMensual = ventasTotales * tasaResico;
+      const beneficioNeto = extraMpos - isrMensual - (friccionAnual / 12);
+
+      document.getElementById('res-sim-friccion').textContent = fmtMXN.format(friccionAnual) + ' MXN';
+      document.getElementById('res-sim-friccion-desc').textContent = `${visitasAnuales} visitas/año (${digital ? 'con SAT Móvil' : 'trámite presencial'})`;
+      document.getElementById('res-sim-extra').textContent = '+' + fmtMXN.format(extraMpos) + ' MXN';
+      document.getElementById('res-sim-isr').textContent = fmtMXN.format(isrMensual) + ' MXN';
+      document.getElementById('res-sim-neto').textContent = (beneficioNeto >= 0 ? '+' : '') + fmtMXN.format(beneficioNeto) + ' MXN';
+    }
+
+    ['sim-ventas', 'sim-distancia', 'sim-traslado', 'sim-digital'].forEach(id => {
+      document.getElementById(id).addEventListener('input', actualizarSimuladorRural);
+      document.getElementById(id).addEventListener('change', actualizarSimuladorRural);
+    });
+
+    // 5. Cuaderno Contable Digital de Subsistencia
+    const movimientosIniciales = [
+      { tipo: 'venta', concepto: 'Venta mostrador abarrotes (Lunes)', monto: 1450, cfdi: 'no' },
+      { tipo: 'proveedor', concepto: 'Surtido refrescos y abarrotes mayorista', monto: 780, cfdi: 'si' },
+      { tipo: 'familiar', concepto: 'Retiro para comida y gasto escolar hogar', monto: 220, cfdi: 'no' }
+    ];
+    let movimientos = JSON.parse(JSON.stringify(movimientosIniciales));
+
+    function renderizarCuaderno() {
+      let ventas = 0, proveedores = 0, familiar = 0, deducible = 0;
+      const lista = document.getElementById('lista-movimientos');
+      lista.innerHTML = '';
+
+      movimientos.forEach((m, idx) => {
+        if (m.tipo === 'venta') ventas += m.monto;
+        if (m.tipo === 'proveedor') {
+          proveedores += m.monto;
+          if (m.cfdi === 'si') deducible += m.monto;
+        }
+        if (m.tipo === 'familiar') familiar += m.monto;
+
+        const badgeColor = m.tipo === 'venta' ? 'bg-emerald-100 text-emerald-800' : (m.tipo === 'proveedor' ? 'bg-amber-100 text-amber-800' : 'bg-red-100 text-red-800');
+        const badgeTexto = m.tipo === 'venta' ? 'Venta' : (m.tipo === 'proveedor' ? 'Proveedor' : 'Hogar');
+
+        lista.innerHTML += `
+          <div class="p-3 flex items-center justify-between gap-2 text-xs hover:bg-white/70 transition">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <span class="px-2 py-0.5 rounded font-bold text-[10px] font-mono shrink-0 ${badgeColor}">${badgeTexto}</span>
+              <span class="font-semibold text-slate-800 truncate">${m.concepto}</span>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <span class="font-mono font-bold text-slate-900">${fmtMXN.format(m.monto)}</span>
+              <button onclick="eliminarMovimiento(${idx})" class="text-slate-400 hover:text-red-600" title="Eliminar"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+          </div>
+        `;
+      });
+
+      const flujo = ventas - proveedores - familiar;
+      document.getElementById('cua-ventas').textContent = fmtMXN.format(ventas);
+      document.getElementById('cua-proveedores').textContent = fmtMXN.format(proveedores);
+      document.getElementById('cua-familiar').textContent = fmtMXN.format(familiar);
+      document.getElementById('cua-flujo').textContent = fmtMXN.format(flujo);
+
+      const pctRetiro = ventas > 0 ? Math.round((familiar / ventas) * 100) : 0;
+      document.getElementById('cua-consejo').innerHTML = `<i class="fa-solid fa-lightbulb text-cartel-gold mr-1.5"></i> Diagnóstico contable: Los retiros familiares representan el <strong>${pctRetiro}%</strong> de tus ventas y tienes <strong>${fmtMXN.format(deducible)}</strong> respaldados con factura/comprobante de proveedor.`;
+    }
+
+    function agregarMovimiento() {
+      const tipo = document.getElementById('mov-tipo').value;
+      const concepto = document.getElementById('mov-concepto').value.trim() || 'Movimiento diario registrado';
+      const monto = parseFloat(document.getElementById('mov-monto').value) || 0;
+      const cfdi = document.getElementById('mov-cfdi').value;
+      if (monto <= 0) return;
+
+      movimientos.unshift({ tipo, concepto, monto, cfdi });
+      document.getElementById('mov-concepto').value = '';
+      renderizarCuaderno();
+      mostrarToast('Movimiento registrado en la libreta contable.');
+    }
+
+    function eliminarMovimiento(idx) {
+      movimientos.splice(idx, 1);
+      renderizarCuaderno();
+    }
+
+    function reiniciarCuaderno() {
+      movimientos = JSON.parse(JSON.stringify(movimientosIniciales));
+      renderizarCuaderno();
+      mostrarToast('Libreta restaurada con datos de ejemplo.');
+    }
+
+    // 6. Diagnóstico de Madurez Digital-Fiscal
+    function evaluarDiagnostico() {
+      const checks = document.querySelectorAll('.diag-check');
+      let marcados = 0;
+      checks.forEach(c => { if (c.checked) marcados++; });
+
+      const pct = marcados * 20;
+      document.getElementById('diag-porcentaje').textContent = pct + '%';
+      document.getElementById('diag-barra').style.width = pct + '%';
+
+      const badge = document.getElementById('diag-puntaje-badge');
+      const titulo = document.getElementById('diag-titulo');
+      const texto = document.getElementById('diag-texto');
+
+      if (marcados <= 1) {
+        badge.textContent = 'Nivel: Informalidad Inicial';
+        titulo.textContent = 'Etapa 1: Separación de Caja y Educación Financiera';
+        texto.textContent = 'El primer paso antes de acudir al SAT es llevar una libreta diaria para separar el dinero del surtido de la tienda respecto al gasto familiar.';
+      } else if (marcados <= 3) {
+        badge.textContent = 'Nivel: En Transición';
+        titulo.textContent = 'Etapa 2: Ordenamiento Contable y Cuenta Nivel 2';
+        texto.textContent = 'Ya cuentas con conectividad básica o control inicial. El siguiente paso recomendado es abrir una cuenta bancaria Nivel 2 sin comisiones y archivar comprobantes de proveedores.';
+      } else {
+        badge.textContent = 'Nivel: Listo para RESICO + mPOS';
+        titulo.textContent = 'Etapa 3: Formalización RESICO y Cobro Digital mPOS';
+        texto.textContent = 'Tu micro-negocio está listo para inscribirse en el RESICO (tasa 1%–2.5%), habilitar cobros con tarjeta/QR (+18% ventas) y construir historial crediticio.';
+      }
+    }
+
+    // 7. Lógica Calculadora Fiscal Pro Ampliada
+    const selTipoContribuyente = document.getElementById('tipo-contribuyente');
+    const grupoRegimenFisica = document.getElementById('grupo-regimen-fisica');
+    const selRegimenFisica = document.getElementById('regimen-fisica');
+
+    selTipoContribuyente.addEventListener('change', () => {
+      grupoRegimenFisica.style.display = selTipoContribuyente.value === 'moral' ? 'none' : 'block';
+      calcularImpuestos();
+    });
+
+    selRegimenFisica.addEventListener('change', calcularImpuestos);
+
+    function calcularTasaResicoFisica(ingresos) {
+      if (ingresos <= 25000) return 0.01;
+      if (ingresos <= 50000) return 0.011;
+      if (ingresos <= 83333.33) return 0.015;
+      if (ingresos <= 208333.33) return 0.02;
+      return 0.025;
+    }
+
+    function calcularImpuestos() {
+      const tipo = selTipoContribuyente.value;
+      const ingresos = parseFloat(document.getElementById('input-ingresos').value) || 0;
+      const deducciones = parseFloat(document.getElementById('input-deducciones').value) || 0;
+      const provisionales = parseFloat(document.getElementById('input-provisionales').value) || 0;
+      const perdidas = parseFloat(document.getElementById('input-perdidas').value) || 0;
+      const ptu = parseFloat(document.getElementById('input-ptu').value) || 0;
+      const retenciones = parseFloat(document.getElementById('input-retenciones').value) || 0;
+
+      let baseGravable = 0;
+      let tasa = 0;
+      let isrBruto = 0;
+      let nombreRegimen = '';
+      let nota = '';
+
+      if (tipo === 'moral') {
+        nombreRegimen = 'Persona Moral (Régimen General 30%)';
+        baseGravable = Math.max(0, ingresos - deducciones - ptu - perdidas);
+        tasa = 0.30;
+        isrBruto = baseGravable * tasa;
+        nota = 'Persona Moral Título II LISR: Resultado fiscal obtenido tras disminuir deducciones autorizadas, PTU pagada en el ejercicio y pérdidas fiscales pendientes de amortizar, aplicando la tasa general del 30%.';
+      } else {
+        const regFisica = selRegimenFisica.value;
+        if (regFisica === 'resico') {
+          nombreRegimen = 'RESICO Persona Física';
+          baseGravable = ingresos;
+          tasa = calcularTasaResicoFisica(ingresos);
+          isrBruto = baseGravable * tasa;
+          nota = 'En RESICO Persona Física (Art. 113-E LISR), el impuesto se calcula directamente sobre los ingresos efectivamente cobrados sin aplicar deducciones en el pago provisional, gozando de tasas mínimas de 1% a 2.5%.';
+        } else {
+          nombreRegimen = 'Actividad Empresarial (Persona Física)';
+          baseGravable = Math.max(0, ingresos - deducciones - ptu - perdidas);
+          if (baseGravable <= 10000) tasa = 0.10;
+          else if (baseGravable <= 30000) tasa = 0.17;
+          else if (baseGravable <= 60000) tasa = 0.25;
+          else tasa = 0.30;
+          isrBruto = baseGravable * tasa;
+          nota = 'Actividad Empresarial y Profesional (Título IV, Cap. II LISR): Se determina sobre la utilidad gravable (ingresos menos deducciones autorizadas, PTU y pérdidas fiscales) aplicando la tarifa progresiva.';
+        }
+      }
+
+      const diferencia = isrBruto - provisionales - retenciones;
+      const lblFinal = document.getElementById('lbl-resultado-final');
+      const resFinal = document.getElementById('res-total-pagar');
+
+      if (diferencia >= 0) {
+        lblFinal.textContent = 'Saldo Neto a Cubrir:';
+        resFinal.textContent = fmtMXNDec.format(diferencia) + ' MXN';
+        resFinal.className = 'font-display text-xl text-red-600 font-black font-mono';
+      } else {
+        lblFinal.textContent = 'Saldo a Favor del Contribuyente:';
+        resFinal.textContent = fmtMXNDec.format(Math.abs(diferencia)) + ' MXN';
+        resFinal.className = 'font-display text-xl text-emerald-700 font-black font-mono';
+      }
+
+      document.getElementById('badge-regimen-activo').textContent = nombreRegimen;
+      document.getElementById('res-base-gravable').textContent = fmtMXN.format(baseGravable) + ' MXN';
+      document.getElementById('res-tasa').textContent = (tasa * 100).toFixed(2) + '%';
+      document.getElementById('res-isr-bruto').textContent = fmtMXNDec.format(isrBruto) + ' MXN';
+      document.getElementById('res-prov').textContent = fmtMXNDec.format(provisionales) + ' MXN';
+      document.getElementById('res-ret').textContent = fmtMXNDec.format(retenciones) + ' MXN';
+      document.getElementById('nota-fiscal-regimen').textContent = nota;
+    }
+
+    ['input-ingresos', 'input-deducciones', 'input-provisionales', 'input-perdidas', 'input-ptu', 'input-retenciones'].forEach(id => {
+      document.getElementById(id).addEventListener('input', calcularImpuestos);
+    });
+
+    // Inicialización
+    actualizarSimuladorRural();
+    renderizarCuaderno();
+    evaluarDiagnostico();
+    calcularImpuestos();
+  </script>
+</body>
+</html>
